@@ -39,7 +39,7 @@ model User {
   id            String     @id @default(cuid())
   name          String?
   email         String?    @unique
-  displayName   String?    @unique
+  handle        String?    @unique
   emailVerified DateTime?
   about         String?
   image         String?
@@ -48,6 +48,7 @@ model User {
   updatedAt     DateTime   @default(now()) @updatedAt
   accounts      Account[]
   sessions      Session[]
+  userRoles     UserRole[]
 }
 
 model VerificationToken {
@@ -56,6 +57,22 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Role {
+  id       String     @id @default(cuid())
+  name     String     @unique
+  userRole UserRole[]
+}
+
+model UserRole {
+  id     String @id @default(cuid())
+  userId String
+  roleId String
+  user   User   @relation(fields: [userId], references: [id])
+  role   Role   @relation(fields: [roleId], references: [id])
+
+  @@unique([userId, roleId])
 }
 
 enum AccessRole {

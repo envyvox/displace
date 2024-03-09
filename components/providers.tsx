@@ -1,6 +1,7 @@
 "use client";
 
 import AuthProvider from "@/services/providers/auth-provider";
+import ReactQueryProvider from "@/services/providers/react-query-provider";
 import { ThemeProvider } from "next-themes";
 
 type Props = {
@@ -8,11 +9,13 @@ type Props = {
 };
 
 const Providers = ({ children }: Props) => (
-  <AuthProvider>
-    <ThemeProvider attribute="class" enableSystem={false}>
-      {children}
-    </ThemeProvider>
-  </AuthProvider>
+  <ReactQueryProvider>
+    <AuthProvider>
+      <ThemeProvider attribute="class" enableSystem={false}>
+        {children}
+      </ThemeProvider>
+    </AuthProvider>
+  </ReactQueryProvider>
 );
 
 export default Providers;
