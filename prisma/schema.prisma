@@ -36,19 +36,20 @@ model Session {
 }
 
 model User {
-  id            String     @id @default(cuid())
+  id            String       @id @default(cuid())
   name          String?
-  email         String?    @unique
-  handle        String?    @unique
+  email         String?      @unique
+  handle        String?      @unique
   emailVerified DateTime?
   about         String?
   image         String?
-  accessRole    AccessRole @default(User)
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @default(now()) @updatedAt
+  accessRole    AccessRole   @default(User)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @default(now()) @updatedAt
   accounts      Account[]
   sessions      Session[]
   userRoles     UserRole[]
+  userSocials   UserSocial[]
 }
 
 model VerificationToken {
@@ -73,6 +74,22 @@ model UserRole {
   role   Role   @relation(fields: [roleId], references: [id])
 
   @@unique([userId, roleId])
+}
+
+model UserSocial {
+  id     String @id @default(cuid())
+  userId String
+  social Social
+  link   String
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@unique([userId, social])
+}
+
+enum Social {
+  Telegram
+  Discord
+  LinkedIn
 }
 
 enum AccessRole {

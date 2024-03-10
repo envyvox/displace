@@ -6,7 +6,7 @@ type UserState = {
   getUser: (email: string) => void;
 };
 
-export const useUserStore = create<UserState>((set) => ({
+export const useUserStore = create<UserState>((set, get) => ({
   user: {
     id: "",
     handle: "",

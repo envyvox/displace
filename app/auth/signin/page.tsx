@@ -42,9 +42,9 @@ const SignInPage = () => {
         <div className="flex flex-col items-center justify-center">
           <div>
             <CardHeader className="space-y-1">
-              <CardTitle className="text-2xl">Sign in</CardTitle>
+              <CardTitle className="text-2xl">Войти в систему</CardTitle>
               <CardDescription>
-                Using one of the following services
+                Используя один из следующих сервисов:
               </CardDescription>
             </CardHeader>
             <CardContent className="grid grid-cols-2 gap-5">

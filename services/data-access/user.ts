@@ -22,3 +22,17 @@ export const getUser = async (email: string): Promise<User> => {
     },
   });
 };
+
+export const setUserHandle = async (
+  userId: string,
+  handle: string
+): Promise<void> => {
+  await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      handle: handle,
+    },
+  });
+};

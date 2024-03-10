@@ -1,12 +1,16 @@
 "use server";
 
-import { Role, UserRole } from "@prisma/client";
+import { Prisma, Role, UserRole } from "@prisma/client";
 
 import prisma from "@/lib/prisma";
 
 export type UserWithRole = {
   role: Role;
 } & UserRole;
+
+export const getRoles = async (): Promise<Role[]> => {
+  return await prisma.role.findMany();
+};
 
 export const getUserRoles = async (userId: string): Promise<UserWithRole[]> => {
   return await prisma.userRole.findMany({
@@ -31,6 +35,21 @@ export const addUserRole = async (
     include: {
       role: true,
     },
+  });
+};
+
+export const addUserRoles = async (
+  userId: string,
+  roleIds: string[]
+): Promise<Prisma.BatchPayload> => {
+  return await prisma.userRole.createMany({
+    data: [
+      ...roleIds.map((roleId) => ({
+        userId: userId,
+        roleId: roleId,
+      })),
+    ],
+    skipDuplicates: true,
   });
 };
 

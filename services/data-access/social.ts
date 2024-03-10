@@ -1,0 +1,33 @@
+"use server";
+
+import { Social, UserSocial } from "@prisma/client";
+
+import prisma from "@/lib/prisma";
+
+export const addUserSocial = async (
+  userId: string,
+  social: Social,
+  link: string
+): Promise<UserSocial> => {
+  return await prisma.userSocial.create({
+    data: {
+      userId: userId,
+      social: social,
+      link: link,
+    },
+  });
+};
+
+export const removeUserSocial = async (
+  userId: string,
+  social: Social
+): Promise<void> => {
+  await prisma.userSocial.delete({
+    where: {
+      userId_social: {
+        userId: userId,
+        social: social,
+      },
+    },
+  });
+};
