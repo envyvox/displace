@@ -36,3 +36,17 @@ export const setUserHandle = async (
     },
   });
 };
+
+export const setUserOnboarding = async (
+  userId: string,
+  onboardingCompleted: boolean
+): Promise<void> => {
+  await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      onboardingCompleted: onboardingCompleted,
+    },
+  });
+};

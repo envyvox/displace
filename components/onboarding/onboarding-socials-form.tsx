@@ -10,6 +10,7 @@ import { z } from "zod";
 import { useAddUserRoles } from "@/hooks/mutations/use-add-user-roles";
 import { useAddUserSocial } from "@/hooks/mutations/use-add-user-socials";
 import { useSetUserHandle } from "@/hooks/mutations/use-set-user-handle";
+import { useSetUserOnboarding } from "@/hooks/mutations/use-set-user-onboarding";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -65,8 +66,9 @@ const OnboardingSocialsForm = () => {
   const { mutate: setUserHandle } = useSetUserHandle();
   const { mutate: addUserRoles } = useAddUserRoles();
   const { mutate: addUserSocial } = useAddUserSocial();
+  const { mutateAsync: setUserOnboarding } = useSetUserOnboarding();
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
     setSocials(data);
 
     setUserHandle({ handle: onboardingForm.handle });
@@ -90,6 +92,8 @@ const OnboardingSocialsForm = () => {
         link: data.linkedIn,
       });
     }
+
+    await setUserOnboarding({ onboardingCompleted: true });
 
     router.push("/dashboard");
   }
