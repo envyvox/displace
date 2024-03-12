@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSession } from "next-auth/react";
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
@@ -9,33 +8,22 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const requestForNextAuth = {
-    headers: {
-      cookie: request.headers.get("cookie") ?? undefined,
-    },
-  };
-
-  const session = await getSession({ req: requestForNextAuth });
-  const isOnboardingCompleted = session?.user?.onboardingCompleted;
+  const authorized =
+    request.cookies.has("next-auth.session-token") ||
+    request.cookies.has("__Secure-next-auth.session-token");
 
   // If user is not authorized and tries to access dashboard, redirect to signin page
   if (
-    !session &&
+    !authorized &&
     (pathname.startsWith("/dashboard") || pathname.startsWith("/onboarding"))
   ) {
     return NextResponse.redirect(new URL(`/auth/signin`, request.url));
   }
 
-  if (session) {
+  if (authorized) {
     // If user is authorized and tries to access sign in page, redirect to dashboard
     if (pathname === `/auth/signin`)
       return NextResponse.redirect(new URL(`/dashboard`, request.url));
-    // If user completed onboarding and tries to access onboarding page, redirect to dashboard
-    if (isOnboardingCompleted && pathname === `/onboarding`)
-      return NextResponse.redirect(new URL(`/dashboard`, request.url));
-    // If user not completed onboarding, redirect to onboarding page
-    if (!isOnboardingCompleted && !pathname.startsWith("/onboarding"))
-      return NextResponse.redirect(new URL(`/onboarding`, request.url));
   }
 
   return NextResponse.next();

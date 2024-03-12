@@ -22,13 +22,4 @@ export const options: NextAuthOptions = {
     error: "/auth/signin",
     newUser: "/onboarding",
   },
-  callbacks: {
-    async session({ session, user }) {
-      if (session.user) {
-        session.user.onboardingCompleted = user.onboardingCompleted;
-        session.user.accessRole = user.accessRole;
-      }
-      return session;
-    },
-  },
 };

@@ -7,6 +7,7 @@ export type User = {
   image: string | null;
   handle: string | null;
   about: string | null;
+  onboardingCompleted: boolean;
 };
 
 const selectFields: Record<keyof User, true> = {
@@ -14,6 +15,7 @@ const selectFields: Record<keyof User, true> = {
   image: true,
   handle: true,
   about: true,
+  onboardingCompleted: true,
 };
 
 export const getUser = async (email: string): Promise<User | null> => {
