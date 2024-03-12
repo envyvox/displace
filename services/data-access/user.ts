@@ -4,21 +4,32 @@ import prisma from "@/lib/prisma";
 
 export type User = {
   id: string;
+  image: string | null;
   handle: string | null;
   about: string | null;
 };
 
 const selectFields: Record<keyof User, true> = {
   id: true,
+  image: true,
   handle: true,
   about: true,
 };
 
-export const getUser = async (email: string): Promise<User> => {
-  return await prisma.user.findUniqueOrThrow({
+export const getUser = async (email: string): Promise<User | null> => {
+  return await prisma.user.findUnique({
     select: selectFields,
     where: {
       email: email,
+    },
+  });
+};
+
+export const getUserByHandle = async (handle: string): Promise<User | null> => {
+  return await prisma.user.findUnique({
+    select: selectFields,
+    where: {
+      handle: handle,
     },
   });
 };

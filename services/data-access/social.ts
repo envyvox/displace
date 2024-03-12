@@ -4,6 +4,14 @@ import { Social, UserSocial } from "@prisma/client";
 
 import prisma from "@/lib/prisma";
 
+export const getUserSocials = async (userId: string): Promise<UserSocial[]> => {
+  return await prisma.userSocial.findMany({
+    where: {
+      userId: userId,
+    },
+  });
+};
+
 export const addUserSocial = async (
   userId: string,
   social: Social,
