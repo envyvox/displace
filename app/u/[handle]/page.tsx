@@ -15,19 +15,15 @@ const UserPage = ({ params }: { params: { handle: string } }) => {
   );
 
   return (
-    <div className="container -mt-24 flex h-screen flex-col items-center justify-center">
-      {user ? (
-        <UserCard
-          user={user}
-          isLoadingUser={isLoadingUser}
-          roles={userRoles ?? []}
-          isLoadingRoles={isLoadingRoles}
-          socials={userSocials ?? []}
-          isloadingSocials={isLoadingSocials}
-        />
-      ) : (
-        "Пользователь с таким именем не найден."
-      )}
+    <div className="-mt-24 flex h-screen flex-col items-center justify-center">
+      <UserCard
+        user={user}
+        isLoadingUser={isLoadingUser}
+        roles={userRoles ?? []}
+        isLoadingRoles={isLoadingRoles}
+        socials={userSocials ?? []}
+        isloadingSocials={isLoadingSocials}
+      />
     </div>
   );
 };
