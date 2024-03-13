@@ -51,6 +51,7 @@ model User {
   sessions            Session[]
   userRoles           UserRole[]
   userSocials         UserSocial[]
+  project             Project[]
 }
 
 model VerificationToken {
@@ -85,6 +86,15 @@ model UserSocial {
   user   User   @relation(fields: [userId], references: [id])
 
   @@unique([userId, social])
+}
+
+model Project {
+  id           String  @id @default(cuid())
+  name         String
+  description  String
+  readMoreLink String?
+  ownerId      String
+  owner        User    @relation(fields: [ownerId], references: [id])
 }
 
 enum Social {
