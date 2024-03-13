@@ -17,12 +17,12 @@ export async function middleware(request: NextRequest) {
     !authorized &&
     (pathname.startsWith("/dashboard") || pathname.startsWith("/onboarding"))
   ) {
-    return NextResponse.redirect(new URL(`/auth/signin`, request.url));
+    return NextResponse.redirect(new URL(`/login`, request.url));
   }
 
   if (authorized) {
     // If user is authorized and tries to access sign in page, redirect to dashboard
-    if (pathname === `/auth/signin`)
+    if (pathname === `/login`)
       return NextResponse.redirect(new URL(`/dashboard`, request.url));
   }
 

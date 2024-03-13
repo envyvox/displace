@@ -18,8 +18,8 @@ export const options: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: "/auth/signin",
-    error: "/auth/signin",
+    signIn: "/login",
+    error: "/login",
     newUser: "/onboarding",
   },
 };
