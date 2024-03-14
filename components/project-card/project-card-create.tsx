@@ -10,7 +10,7 @@ import ProjectCreateButton from "./project-create-button";
 
 const ProjectCardCreate = () => {
   return (
-    <Card className="flex flex-col items-end justify-between">
+    <Card className="col-span-1 flex flex-col items-end justify-between">
       <CardHeader>
         <CardTitle>Есть идея?</CardTitle>
         <CardDescription>
