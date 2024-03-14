@@ -3,8 +3,7 @@ import Link from "next/link";
 import { Social } from "@prisma/client";
 
 import { cn } from "@/lib/utils";
-
-import { buttonVariants } from "./ui/button";
+import { buttonVariants } from "@/components/ui/button";
 
 type Props = {
   social: Social;

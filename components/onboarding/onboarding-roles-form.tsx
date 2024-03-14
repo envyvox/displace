@@ -6,11 +6,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { useRoles } from "@/hooks/queries/use-roles";
-
-import TypographyLarge from "../typography/large";
-import TypographyMuted from "../typography/muted";
-import { Button } from "../ui/button";
-import { Checkbox } from "../ui/checkbox";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -18,7 +15,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
+} from "@/components/ui/form";
+import TypographyLarge from "@/components/typography/large";
+import TypographyMuted from "@/components/typography/muted";
 
 const FormSchema = z.object({
   roles: z.array(z.string()).refine((value) => value.some((role) => role), {

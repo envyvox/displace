@@ -20,10 +20,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
-import TypographyLarge from "../typography/large";
-import TypographyMuted from "../typography/muted";
-import { Input } from "../ui/input";
+import { Input } from "@/components/ui/input";
+import TypographyLarge from "@/components/typography/large";
+import TypographyMuted from "@/components/typography/muted";
 
 const FormSchema = z.object({
   telegram: z

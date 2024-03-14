@@ -4,8 +4,8 @@ import { useUserStore } from "@/store/user-store";
 import { LogOut } from "lucide-react";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Button } from "./ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,8 +13,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { Skeleton } from "./ui/skeleton";
+} from "@/components/ui/dropdown-menu";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const SessionAvatar = () => {
   const { data: session, status } = useSession();

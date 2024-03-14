@@ -1,9 +1,8 @@
 import Link from "next/link";
 
 import { siteConfig } from "@/config/site";
-
-import SessionAvatar from "./session-avatar";
-import ThemeToggle from "./theme-toggle";
+import SessionAvatar from "@/components/session-avatar";
+import ThemeToggle from "@/components/theme-toggle";
 
 const Header = () => {
   return (

@@ -15,7 +15,7 @@ const UserPage = ({ params }: { params: { handle: string } }) => {
   );
 
   return (
-    <div className="-mt-24 flex h-screen flex-col items-center justify-center">
+    <div className="-mt-24 flex min-h-screen flex-col items-center justify-center">
       <UserCard
         user={user}
         isLoadingUser={isLoadingUser}

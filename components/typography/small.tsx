@@ -1,9 +1,17 @@
-type Props = {
-  children: React.ReactNode;
-};
+import React from "react";
 
-const TypographySmall = ({ children }: Props) => (
-  <small className="text-sm font-medium leading-none">{children}</small>
-);
+import { cn } from "@/lib/utils";
+
+const TypographySmall = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }, ref) => (
+  <small
+    ref={ref}
+    className={cn("text-sm font-medium leading-none", className)}
+    {...props}
+  />
+));
+TypographySmall.displayName = "TypographySmall";
 
 export default TypographySmall;

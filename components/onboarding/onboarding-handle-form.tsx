@@ -5,18 +5,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import TypographyInlineCode from "../typography/inline-code";
-import TypographyLarge from "../typography/large";
-import TypographyMuted from "../typography/muted";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from "../ui/form";
-import { Input } from "../ui/input";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import TypographyInlineCode from "@/components/typography/inline-code";
+import TypographyLarge from "@/components/typography/large";
+import TypographyMuted from "@/components/typography/muted";
 
 const FormSchema = z.object({
   handle: z

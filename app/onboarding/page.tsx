@@ -22,7 +22,7 @@ const Onboarding = () => {
   if (user.id !== "" && user.onboardingCompleted) router.push("/dashboard");
 
   return (
-    <main className="container -mt-24 flex h-screen max-w-xl items-center justify-center">
+    <main className="container -mt-24 flex min-h-screen max-w-xl items-center justify-center">
       {OnboardingForm[onboardingStep]}
     </main>
   );

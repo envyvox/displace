@@ -2,18 +2,18 @@ import { UserWithRole } from "@/services/data-access/role";
 import { User } from "@/services/data-access/user";
 import { UserSocial } from "@prisma/client";
 
-import SocialLink from "./social-link";
-import TypographyMuted from "./typography/muted";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Badge } from "./ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "./ui/card";
-import { Skeleton } from "./ui/skeleton";
+} from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+import SocialLink from "@/components/social-link";
+import TypographyMuted from "@/components/typography/muted";
 
 type Props = {
   user: User | null | undefined;
