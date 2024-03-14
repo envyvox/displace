@@ -20,7 +20,12 @@ type Props = {
 const ProjectCard = ({ project, index }: Props) => {
   return (
     // TODO: col-spans require more testings
-    <Card className={cn("col-span-1", index % 5 === 0 && "lg:col-span-2")}>
+    <Card
+      className={cn(
+        "col-span-1 transition hover:border-primary/30",
+        index % 5 === 0 && "lg:col-span-2"
+      )}
+    >
       <CardHeader>
         <CardTitle>{project.name}</CardTitle>
         <CardDescription>
