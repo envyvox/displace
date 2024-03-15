@@ -1,11 +1,10 @@
 import Link from "next/link";
 
 import { siteConfig } from "@/config/site";
+import { Separator } from "@/components/ui/separator";
+import MainNav from "@/components/main-nav";
+import MobileNav from "@/components/mobile-nav";
 import SessionAvatar from "@/components/session-avatar";
-
-import MainNav from "./main-nav";
-import MobileNav from "./mobile-nav";
-import { Separator } from "./ui/separator";
 
 const Header = () => {
   return (

@@ -12,15 +12,12 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
-
-import TypographyLarge from "./typography/large";
-import TypographyMuted from "./typography/muted";
-import TypographySmall from "./typography/small";
+import TypographyMuted from "@/components/typography/muted";
+import TypographySmall from "@/components/typography/small";
 
 const SessionAvatar = () => {
   const { data: session, status } = useSession();
