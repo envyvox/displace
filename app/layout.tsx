@@ -5,7 +5,6 @@ import "./globals.css";
 
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import Footer from "@/components/footer";
 import Header from "@/components/header";
 import Providers from "@/components/providers";
 import TailwindIndicator from "@/components/tailwind-indicator";
@@ -39,8 +38,7 @@ export default function RootLayout({
         <Providers>
           <div className="flex flex-col">
             <Header />
-            <div className="min-h-[80vh] flex-1">{children}</div>
-            <Footer />
+            <div className="flex-1">{children}</div>
           </div>
           <TailwindIndicator />
         </Providers>

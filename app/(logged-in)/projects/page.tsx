@@ -5,7 +5,7 @@ import ProjectCard from "@/components/project-card/project-card";
 import ProjectCardCreate from "@/components/project-card/project-card-create";
 import ProjectCardSkeleton from "@/components/project-card/project-card-skeleton";
 
-const Dashboard = () => {
+const ProjectsPage = () => {
   const { data: projects, isLoading } = useProjects();
 
   return (
@@ -28,4 +28,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default ProjectsPage;

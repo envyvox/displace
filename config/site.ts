@@ -8,6 +8,7 @@ export const siteConfig = {
   description: "Displace",
   links: {
     twitter: "https://twitter.com/envyvox",
+    discord: "https://discord.gg/hBcM7cFNEn",
     github: "https://github.com/envyvox/displace",
     buymeacoffee: "https://www.buymeacoffee.com/envyvox",
   },

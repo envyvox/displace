@@ -61,7 +61,7 @@ const LoginPage = () => {
                 key={provider.name}
                 variant="secondary"
                 onClick={() =>
-                  signIn(provider.id, { callbackUrl: "/dashboard" })
+                  signIn(provider.id, { callbackUrl: "/projects" })
                 }
               >
                 {ProviderIcon[provider.name]}

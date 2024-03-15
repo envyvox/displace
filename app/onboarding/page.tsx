@@ -19,7 +19,7 @@ const Onboarding = () => {
   const onboardingStep = useOnboardingStore((state) => state.Step);
   const router = useRouter();
 
-  if (user.id !== "" && user.onboardingCompleted) router.push("/dashboard");
+  if (user.id !== "" && user.onboardingCompleted) router.push("/projects");
 
   return (
     <main className="container -mt-24 flex min-h-screen max-w-xl items-center justify-center">

@@ -94,7 +94,7 @@ const OnboardingSocialsForm = () => {
 
     await setUserOnboarding({ onboardingCompleted: true });
 
-    router.push("/dashboard");
+    router.push("/projects");
   }
 
   return (
