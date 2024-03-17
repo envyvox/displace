@@ -49,7 +49,7 @@ function ProjectCreateForm({ setOpen }: FormProps) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="grid items-start gap-4 px-4"
+        className="grid items-start gap-4 p-4 md:px-0"
       >
         <FormField
           control={form.control}
@@ -74,6 +74,7 @@ function ProjectCreateForm({ setOpen }: FormProps) {
                 <Textarea
                   id="description"
                   placeholder="Это проект моей мечты, я очень хочу его воплощать!"
+                  rows={15}
                   {...field}
                 />
               </FormControl>

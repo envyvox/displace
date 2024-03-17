@@ -2,15 +2,15 @@ import { useState } from "react";
 
 import { useMediaQuery } from "@/hooks/use-media-query";
 
-import ProjectCreateDialog from "./project-create-dialog";
 import ProjectCreateDrawer from "./project-create-drawer";
+import ProjectCreateSheet from "./project-create-sheet";
 
 const ProjectCreateButton = () => {
   const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   return isDesktop ? (
-    <ProjectCreateDialog open={open} setOpen={setOpen} />
+    <ProjectCreateSheet open={open} setOpen={setOpen} />
   ) : (
     <ProjectCreateDrawer open={open} setOpen={setOpen} />
   );
