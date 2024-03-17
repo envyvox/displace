@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Project } from "@/services/data-access/project";
 
 import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
@@ -44,7 +45,16 @@ const ProjectCard = ({ project, index }: Props) => {
           {project.description}
         </TypographyMuted>
       </CardContent>
-      <CardFooter className="flex justify-end">
+      <CardFooter className="flex justify-between gap-2">
+        <div className="flex flex-wrap gap-2">
+          {project?.stack
+            .slice(0, 3)
+            // Since stack is not an unique, adding index to the key just in case of duplicates
+            .map((stack, index) => <Badge key={stack + index}>{stack}</Badge>)}
+          {project?.stack.length > 3 && (
+            <Badge>+{project?.stack.slice(3).length}</Badge>
+          )}
+        </div>
         <Link
           href={`/p/${project.id}`}
           className={buttonVariants({ variant: "outline" })}

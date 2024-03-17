@@ -9,6 +9,7 @@ export type Project = {
   name: string;
   description: string;
   readMoreLink: string | null;
+  stack: string[];
   owner: User;
 };
 
@@ -31,6 +32,7 @@ export const createProject = async (
   ownderId: string,
   name: string,
   description: string,
+  stack: string[],
   readMoreLink?: string
 ): Promise<Project> => {
   return await prisma.project.create({
@@ -38,6 +40,7 @@ export const createProject = async (
       ownerId: ownderId,
       name: name,
       description: description,
+      stack: stack,
       readMoreLink: readMoreLink,
     },
     include: {

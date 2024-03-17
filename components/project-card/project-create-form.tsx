@@ -18,6 +18,11 @@ import { Textarea } from "@/components/ui/textarea";
 const FormSchema = z.object({
   name: z.string().min(1, { message: "Название проекта обязательно." }),
   description: z.string().min(1, { message: "Описание проекта обязательно." }),
+  stack: z
+    .string()
+    .refine((value) => value.split(",").filter(Boolean).length > 0, {
+      message: "Необходимо указать хотя бы одну технологию.",
+    }),
   readMoreLink: z.string(),
 });
 
@@ -32,6 +37,7 @@ function ProjectCreateForm({ setOpen }: FormProps) {
     defaultValues: {
       name: "",
       description: "",
+      stack: "",
       readMoreLink: "",
     },
   });
@@ -40,6 +46,7 @@ function ProjectCreateForm({ setOpen }: FormProps) {
     createProject({
       name: data.name,
       description: data.description,
+      stack: data.stack.split(",").map((stack) => stack.trim()),
       readMoreLink: data.readMoreLink,
     });
     setOpen(false);
@@ -74,7 +81,24 @@ function ProjectCreateForm({ setOpen }: FormProps) {
                 <Textarea
                   id="description"
                   placeholder="Это проект моей мечты, я очень хочу его воплощать!"
-                  rows={15}
+                  rows={10}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="stack"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Используемые технологии</FormLabel>
+              <FormControl>
+                <Textarea
+                  id="stack"
+                  placeholder="React, Next.js, NextAuth, Prisma, Typescript, Tailwindcss, Zustand"
                   {...field}
                 />
               </FormControl>

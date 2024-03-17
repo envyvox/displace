@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { useProject } from "@/hooks/queries/use-project";
+import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
@@ -13,6 +14,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import TypographyLarge from "@/components/typography/large";
 import TypographyMuted from "@/components/typography/muted";
 
 const ProjectPage = ({ params }: { params: { id: string } }) => {
@@ -37,17 +39,26 @@ const ProjectPage = ({ params }: { params: { id: string } }) => {
           <TypographyMuted className="leading-6">
             {project?.description}
           </TypographyMuted>
+          <div className="mt-4 space-y-2">
+            <TypographyLarge>Используемые технологии</TypographyLarge>
+            <div className="flex flex-wrap gap-2">
+              {project?.stack.map((stack, index) => (
+                // Since stack is not an unique, adding index to the key just in case of duplicates
+                <Badge key={stack + index}>{stack}</Badge>
+              ))}
+            </div>
+          </div>
         </CardContent>
-        <CardFooter className="flex justify-end">
-          {project?.readMoreLink && (
+        {project?.readMoreLink && (
+          <CardFooter className="flex justify-end">
             <Link
               href={project?.readMoreLink}
               className={cn(buttonVariants({ variant: "outline" }), "")}
             >
               Узнать больше
             </Link>
-          )}
-        </CardFooter>
+          </CardFooter>
+        )}
       </Card>
     </div>
   );
