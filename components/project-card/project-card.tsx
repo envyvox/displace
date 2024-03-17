@@ -7,6 +7,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -22,7 +23,7 @@ const ProjectCard = ({ project, index }: Props) => {
     // TODO: col-spans require more testings
     <Card
       className={cn(
-        "col-span-1 transition hover:border-primary/30",
+        "col-span-1 flex flex-col transition hover:border-primary/30",
         index % 5 === 0 && "lg:col-span-2"
       )}
     >
@@ -38,11 +39,19 @@ const ProjectCard = ({ project, index }: Props) => {
           </Link>
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-1">
         <TypographyMuted className="line-clamp-6 leading-6">
           {project.description}
         </TypographyMuted>
       </CardContent>
+      <CardFooter className="flex justify-end">
+        <Link
+          href={`/p/${project.id}`}
+          className={buttonVariants({ variant: "outline" })}
+        >
+          Подробнее
+        </Link>
+      </CardFooter>
     </Card>
   );
 };

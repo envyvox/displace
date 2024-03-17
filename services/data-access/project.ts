@@ -16,6 +16,17 @@ export const getProjects = async (): Promise<Project[]> => {
   return await prisma.project.findMany({ include: { owner: true } });
 };
 
+export const getProject = async (id: string): Promise<Project | null> => {
+  return await prisma.project.findUnique({
+    where: {
+      id: id,
+    },
+    include: {
+      owner: true,
+    },
+  });
+};
+
 export const createProject = async (
   ownderId: string,
   name: string,
