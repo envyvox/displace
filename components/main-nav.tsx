@@ -12,7 +12,7 @@ const MainNav = () => {
 
   return (
     <div className="hidden lg:flex">
-      <nav className="flex items-center gap-6 text-sm">
+      <nav className="flex items-center gap-6 text-sm font-medium">
         <Link
           href="/projects"
           className={cn(
