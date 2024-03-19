@@ -13,11 +13,13 @@ const ProjectsPage = () => {
       <ProjectCardCreate />
       {isLoading ? (
         <>
-          <ProjectCardSkeleton />
-          <ProjectCardSkeleton />
-          <ProjectCardSkeleton />
-          <ProjectCardSkeleton />
-          <ProjectCardSkeleton />
+          <ProjectCardSkeleton index={0} />
+          <ProjectCardSkeleton index={1} />
+          <ProjectCardSkeleton index={2} />
+          <ProjectCardSkeleton index={3} />
+          <ProjectCardSkeleton index={4} />
+          <ProjectCardSkeleton index={5} />
+          <ProjectCardSkeleton index={6} />
         </>
       ) : (
         projects?.map((project, index) => (
