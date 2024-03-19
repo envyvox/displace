@@ -34,7 +34,7 @@ const UserCard = ({
 }: Props) => {
   if (!isLoadingUser && !user) {
     return (
-      <Card className="max-w-[500px]">
+      <Card className="max-w-3xl">
         <CardHeader>
           <CardDescription>
             Пользователь с таким именем не найден.
@@ -45,7 +45,7 @@ const UserCard = ({
   }
 
   return (
-    <Card className="max-w-[500px]">
+    <Card className="max-w-3xl">
       <CardHeader className="flex flex-row items-center gap-4">
         <Avatar className="size-24">
           <AvatarImage src={user?.image!} alt={user?.handle!} />
