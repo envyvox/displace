@@ -84,7 +84,9 @@ const ProjectDetailCard = ({ project, isLoading }: Props) => {
             ) : (
               project?.stack.map((stack, index) => (
                 // Since stack is not an unique, adding index to the key just in case of duplicates
-                <Badge key={stack + index}>{stack}</Badge>
+                <Badge key={stack + index} variant="secondary">
+                  {stack}
+                </Badge>
               ))
             )}
           </div>

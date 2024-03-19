@@ -70,7 +70,9 @@ const UserCard = ({
           ) : (
             <CardDescription className="flex flex-wrap gap-2">
               {roles.map(({ role }) => (
-                <Badge key={role.id}>{role.name}</Badge>
+                <Badge key={role.id} variant="secondary">
+                  {role.name}
+                </Badge>
               ))}
             </CardDescription>
           )}

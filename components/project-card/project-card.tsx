@@ -50,9 +50,13 @@ const ProjectCard = ({ project, index }: Props) => {
           {project?.stack
             .slice(0, 3)
             // Since stack is not an unique, adding index to the key just in case of duplicates
-            .map((stack, index) => <Badge key={stack + index}>{stack}</Badge>)}
+            .map((stack, index) => (
+              <Badge key={stack + index} variant="secondary">
+                {stack}
+              </Badge>
+            ))}
           {project?.stack.length > 3 && (
-            <Badge>+{project?.stack.slice(3).length}</Badge>
+            <Badge variant="secondary">+{project?.stack.slice(3).length}</Badge>
           )}
         </div>
         <Link
