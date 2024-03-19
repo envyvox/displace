@@ -14,6 +14,13 @@ import {
 } from "@/components/ui/card";
 import TypographyMuted from "@/components/typography/muted";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
+
 type Props = {
   project: Project;
   index: number;
@@ -56,7 +63,22 @@ const ProjectCard = ({ project, index }: Props) => {
               </Badge>
             ))}
           {project?.stack.length > 3 && (
-            <Badge variant="secondary">+{project?.stack.slice(3).length}</Badge>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Badge variant="secondary">
+                    +{project?.stack.slice(3).length}
+                  </Badge>
+                </TooltipTrigger>
+                <TooltipContent className="flex max-w-64 flex-wrap gap-2 p-2">
+                  {project?.stack.slice(3).map((stack) => (
+                    <Badge key={stack} variant="secondary">
+                      {stack}
+                    </Badge>
+                  ))}
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           )}
         </div>
         <Link
