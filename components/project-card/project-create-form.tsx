@@ -123,7 +123,9 @@ function ProjectCreateForm({ setOpen }: FormProps) {
             </FormItem>
           )}
         />
-        <Button type="submit">Создать</Button>
+        <Button className="md:w-fit md:justify-self-end" type="submit">
+          Создать
+        </Button>
       </form>
     </Form>
   );
