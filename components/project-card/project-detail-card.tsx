@@ -62,6 +62,10 @@ const ProjectDetailCard = ({ project, isLoading }: Props) => {
             <Skeleton className="h-[14px] w-1/2" />
             <Skeleton className="h-[14px] w-full" />
             <Skeleton className="h-[14px] w-1/4" />
+            <Skeleton className="h-[14px] w-full" />
+            <Skeleton className="h-[14px] w-full" />
+            <Skeleton className="h-[14px] w-full" />
+            <Skeleton className="h-[14px] w-1/4" />
           </div>
         ) : (
           <TypographyMuted className="leading-6">
@@ -69,7 +73,11 @@ const ProjectDetailCard = ({ project, isLoading }: Props) => {
           </TypographyMuted>
         )}
         <div className="mt-4 space-y-2">
-          <TypographyLarge>Используемые технологии</TypographyLarge>
+          {isLoading ? (
+            <Skeleton className="h-[20px] w-1/3" />
+          ) : (
+            <TypographyLarge>Используемые технологии</TypographyLarge>
+          )}
           <div className="flex flex-wrap gap-2">
             {isLoading ? (
               <>
