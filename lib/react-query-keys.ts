@@ -1,4 +1,5 @@
 export const ReactQueryKeys = {
+  users: ["users"],
   roles: ["roles"],
   projects: ["projects"],
   project: (id: string) => ["project", id],

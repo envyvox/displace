@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Project } from "@/services/data-access/project";
 
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
@@ -12,14 +11,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Bagdes from "@/components/bagdes";
 import TypographyMuted from "@/components/typography/muted";
-
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
 
 type Props = {
   project: Project;
@@ -53,34 +46,12 @@ const ProjectCard = ({ project, index }: Props) => {
         </TypographyMuted>
       </CardContent>
       <CardFooter className="flex justify-between gap-2">
-        <div className="flex flex-wrap gap-2">
-          {project?.stack
-            .slice(0, 3)
-            // Since stack is not an unique, adding index to the key just in case of duplicates
-            .map((stack, index) => (
-              <Badge key={stack + index} variant="secondary">
-                {stack}
-              </Badge>
-            ))}
-          {project?.stack.length > 3 && (
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
-                  <Badge variant="secondary">
-                    +{project?.stack.slice(3).length}
-                  </Badge>
-                </TooltipTrigger>
-                <TooltipContent className="flex max-w-64 flex-wrap gap-2 p-2">
-                  {project?.stack.slice(3).map((stack) => (
-                    <Badge key={stack} variant="secondary">
-                      {stack}
-                    </Badge>
-                  ))}
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          )}
-        </div>
+        <Bagdes
+          values={project.stack.map((stack, index) => ({
+            key: stack + index,
+            value: stack,
+          }))}
+        />
         <Link
           href={`/p/${project.id}`}
           className={buttonVariants({ variant: "outline" })}

@@ -10,6 +10,15 @@ export type User = {
   onboardingCompleted: boolean;
 };
 
+export type UserWithRoles = User & {
+  userRoles: {
+    role: {
+      id: string;
+      name: string;
+    };
+  }[];
+};
+
 const selectFields: Record<keyof User, true> = {
   id: true,
   image: true,
@@ -23,6 +32,19 @@ export const getUser = async (email: string): Promise<User | null> => {
     select: selectFields,
     where: {
       email: email,
+    },
+  });
+};
+
+export const getUsers = async () => {
+  return await prisma.user.findMany({
+    select: {
+      ...selectFields,
+      userRoles: {
+        select: {
+          role: true,
+        },
+      },
     },
   });
 };
