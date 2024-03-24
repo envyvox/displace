@@ -17,8 +17,17 @@ export const addUserSocial = async (
   social: Social,
   link: string
 ): Promise<UserSocial> => {
-  return await prisma.userSocial.create({
-    data: {
+  return await prisma.userSocial.upsert({
+    where: {
+      userId_social: {
+        userId: userId,
+        social: social,
+      },
+    },
+    update: {
+      link: link,
+    },
+    create: {
       userId: userId,
       social: social,
       link: link,

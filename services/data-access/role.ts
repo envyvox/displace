@@ -53,15 +53,15 @@ export const addUserRoles = async (
   });
 };
 
-export const removeUserRole = async (
+export const removeUserRoles = async (
   userId: string,
-  roleId: string
+  rolesId: string[]
 ): Promise<void> => {
-  await prisma.userRole.delete({
+  await prisma.userRole.deleteMany({
     where: {
-      userId_roleId: {
-        userId: userId,
-        roleId: roleId,
+      userId: userId,
+      roleId: {
+        in: rolesId,
       },
     },
   });
