@@ -19,7 +19,9 @@ const Onboarding = () => {
   const onboardingStep = useOnboardingStore((state) => state.Step);
   const router = useRouter();
 
-  if (user.id !== "" && user.onboardingCompleted) router.push("/projects");
+  // TODO: this way it breaks onboarding
+  // after onboarding user onboarding state updates faster in store then all requests are fired to the server, then this line triggers and redirect which cancels all requests ;/
+  // if (user.id !== "" && user.onboardingCompleted) router.push("/projects");
 
   return (
     <main className="container -mt-24 flex min-h-screen max-w-xl items-center justify-center">
