@@ -8,13 +8,7 @@ const UsersPage = () => {
   const { data: users, isLoading } = useUsers();
 
   return (
-    <div>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        users && <DataTable columns={columns} data={users} />
-      )}
-    </div>
+    <DataTable columns={columns} data={users ?? []} isLoading={isLoading} />
   );
 };
 
