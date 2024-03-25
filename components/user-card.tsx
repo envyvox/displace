@@ -88,7 +88,7 @@ const UserCard = ({
         ) : socials.length ? (
           socials.map((social) => (
             <SocialLink
-              key={social.id}
+              key={`${social}`}
               social={social.social}
               link={social.link}
             />

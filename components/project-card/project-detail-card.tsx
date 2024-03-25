@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Project } from "@/services/data-access/project";
 
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
@@ -13,7 +12,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import TypographyLarge from "@/components/typography/large";
 import TypographyMuted from "@/components/typography/muted";
 
 type Props = {
@@ -22,20 +20,8 @@ type Props = {
 };
 
 const ProjectDetailCard = ({ project, isLoading }: Props) => {
-  if (!isLoading && !project) {
-    return (
-      <Card className="max-w-3xl">
-        <CardHeader>
-          <CardDescription>
-            Проект с таким идентификатором не найден.
-          </CardDescription>
-        </CardHeader>
-      </Card>
-    );
-  }
-
   return (
-    <Card className="max-w-3xl">
+    <Card className="col-span-3 md:col-span-2">
       <CardHeader>
         <CardTitle>
           {isLoading ? <Skeleton className="h-[24px] w-1/2" /> : project?.name}
@@ -72,7 +58,7 @@ const ProjectDetailCard = ({ project, isLoading }: Props) => {
             {project?.description}
           </TypographyMuted>
         )}
-        <div className="mt-4 space-y-2">
+        {/* <div className="mt-4 space-y-2">
           {isLoading ? (
             <Skeleton className="h-[20px] w-1/3" />
           ) : (
@@ -86,7 +72,7 @@ const ProjectDetailCard = ({ project, isLoading }: Props) => {
                 <Skeleton className="h-[22px] w-32 rounded-full" />
                 <Skeleton className="h-[22px] w-32 rounded-full" />
                 <Skeleton className="h-[22px] w-32 rounded-full" />
-                <Skeleton className="h-[22px] w-32 rounded-full" />
+                <Skeleton className="h-[22px] w-32 rounded-full" /> 
                 <Skeleton className="h-[22px] w-32 rounded-full" />
               </>
             ) : (
@@ -98,7 +84,7 @@ const ProjectDetailCard = ({ project, isLoading }: Props) => {
               ))
             )}
           </div>
-        </div>
+        </div> */}
       </CardContent>
       {project?.readMoreLink && (
         <CardFooter className="flex justify-end">

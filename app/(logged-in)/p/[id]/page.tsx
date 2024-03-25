@@ -2,13 +2,30 @@
 
 import { useProject } from "@/hooks/queries/use-project";
 import ProjectDetailCard from "@/components/project-card/project-detail-card";
+import ProjectDetailMembers from "@/components/project-card/project-detail-members";
+import ProjectDetailNotFound from "@/components/project-card/project-detail-not-found";
+import ProjectDetailStack from "@/components/project-card/project-detail-stack";
 
 const ProjectPage = ({ params }: { params: { id: string } }) => {
   const { data: project, isLoading } = useProject({ id: params.id });
 
+  if (!isLoading && !project) {
+    return <ProjectDetailNotFound />;
+  }
+
   return (
-    <div className="-mt-24 flex min-h-screen items-center justify-center">
+    <div className="grid gap-8 md:grid-cols-3">
       <ProjectDetailCard project={project} isLoading={isLoading} />
+      <div className="col-span-3 flex flex-col gap-8 md:col-span-1">
+        <ProjectDetailStack
+          stack={project?.stack ?? []}
+          isLoading={isLoading}
+        />
+        <ProjectDetailMembers
+          members={project?.members.map(({ user }) => user) ?? []}
+          isLoading={isLoading}
+        />
+      </div>
     </div>
   );
 };

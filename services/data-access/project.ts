@@ -12,11 +12,33 @@ export type Project = {
   description: string;
   readMoreLink: string | null;
   stack: string[];
+  lookingForRoles: { role: { name: string } }[];
   owner: User;
+  members: { user: User }[];
+};
+
+const includeFields = {
+  owner: true,
+  members: {
+    select: {
+      user: true,
+    },
+  },
+  lookingForRoles: {
+    select: {
+      role: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  },
 };
 
 export const getProjects = async (): Promise<Project[]> => {
-  return await prisma.project.findMany({ include: { owner: true } });
+  return await prisma.project.findMany({
+    include: includeFields,
+  });
 };
 
 export const getProject = async (id: string): Promise<Project | null> => {
@@ -24,9 +46,7 @@ export const getProject = async (id: string): Promise<Project | null> => {
     where: {
       id: id,
     },
-    include: {
-      owner: true,
-    },
+    include: includeFields,
   });
 };
 
@@ -37,22 +57,21 @@ export const createProject = async (
   stack: string[],
   readMoreLink?: string
 ): Promise<Project> => {
-  const project = await prisma.project.create({
+  return await prisma.project.create({
     data: {
       ownerId: ownderId,
       name: name,
       description: description,
       stack: stack,
       readMoreLink: readMoreLink,
+      members: {
+        create: {
+          userId: ownderId,
+        },
+      },
     },
-    include: {
-      owner: true,
-    },
+    include: includeFields,
   });
-
-  await addMemberToProject(project.id, ownderId);
-
-  return project;
 };
 
 export const addMemberToProject = async (
