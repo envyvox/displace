@@ -1,5 +1,7 @@
 "use server";
 
+import { ProjectMembers } from "@prisma/client";
+
 import prisma from "@/lib/prisma";
 
 import { User } from "./user";
@@ -35,7 +37,7 @@ export const createProject = async (
   stack: string[],
   readMoreLink?: string
 ): Promise<Project> => {
-  return await prisma.project.create({
+  const project = await prisma.project.create({
     data: {
       ownerId: ownderId,
       name: name,
@@ -45,6 +47,36 @@ export const createProject = async (
     },
     include: {
       owner: true,
+    },
+  });
+
+  await addMemberToProject(project.id, ownderId);
+
+  return project;
+};
+
+export const addMemberToProject = async (
+  projectId: string,
+  userId: string
+): Promise<ProjectMembers> => {
+  return await prisma.projectMembers.create({
+    data: {
+      projectId: projectId,
+      userId: userId,
+    },
+  });
+};
+
+export const removeMemberFromProject = async (
+  projectId: string,
+  userId: string
+): Promise<void> => {
+  await prisma.projectMembers.delete({
+    where: {
+      projectId_userId: {
+        projectId: projectId,
+        userId: userId,
+      },
     },
   });
 };
