@@ -36,22 +36,23 @@ model Session {
 }
 
 model User {
-  id                  String       @id @default(cuid())
+  id                  String           @id @default(cuid())
   name                String?
-  email               String?      @unique
-  handle              String?      @unique
+  email               String?          @unique
+  handle              String?          @unique
   emailVerified       DateTime?
-  onboardingCompleted Boolean      @default(false)
+  onboardingCompleted Boolean          @default(false)
   about               String?
   image               String?
-  accessRole          AccessRole   @default(User)
-  createdAt           DateTime     @default(now())
-  updatedAt           DateTime     @default(now()) @updatedAt
+  accessRole          AccessRole       @default(User)
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @default(now()) @updatedAt
   accounts            Account[]
   sessions            Session[]
   userRoles           UserRole[]
   userSocials         UserSocial[]
   project             Project[]
+  projectMembers      ProjectMembers[]
 }
 
 model VerificationToken {
@@ -63,9 +64,11 @@ model VerificationToken {
 }
 
 model Role {
-  id       String     @id @default(cuid())
-  name     String     @unique
-  userRole UserRole[]
+  id        String     @id @default(cuid())
+  name      String     @unique
+  userRole  UserRole[]
+  projectId String?
+  project   Project?   @relation(fields: [projectId], references: [id])
 }
 
 model UserRole {
@@ -89,13 +92,25 @@ model UserSocial {
 }
 
 model Project {
-  id           String   @id @default(cuid())
-  name         String
-  description  String
-  readMoreLink String?
-  stack        String[]
-  ownerId      String
-  owner        User     @relation(fields: [ownerId], references: [id])
+  id              String           @id @default(cuid())
+  name            String
+  description     String
+  readMoreLink    String?
+  stack           String[]
+  lookingForRoles Role[]
+  ownerId         String
+  owner           User             @relation(fields: [ownerId], references: [id])
+  ProjectMembers  ProjectMembers[]
+}
+
+model ProjectMembers {
+  id        String  @id @default(cuid())
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id])
+  userId    String
+  user      User    @relation(fields: [userId], references: [id])
+
+  @@unique([projectId, userId])
 }
 
 enum Social {
