@@ -3,6 +3,7 @@ import { User } from "@/services/data-access/user";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardHeader } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import TypographyLarge from "@/components/typography/large";
 
 type Props = {
@@ -11,20 +12,35 @@ type Props = {
 };
 
 const ProjectDetailMembers = ({ members, isLoading }: Props) => {
-  // TODO: add skeleton on loading
   return (
     <Card className="h-fit md:max-w-md">
       <CardHeader>
-        <TypographyLarge>Участники</TypographyLarge>
+        {isLoading ? (
+          <Skeleton className="h-[24px] w-1/3" />
+        ) : (
+          <TypographyLarge>Участники</TypographyLarge>
+        )}
         <div className="flex flex-wrap gap-2">
-          {members.map((user) => (
-            <Link href={`/u/${user.handle}`} key={user.id}>
-              <Avatar>
-                <AvatarImage src={user.image ?? ""} />
-                <AvatarFallback>{user.handle![0].toUpperCase()}</AvatarFallback>
-              </Avatar>
-            </Link>
-          ))}
+          {isLoading ? (
+            <>
+              <Skeleton className="size-10 rounded-full" />
+              <Skeleton className="size-10 rounded-full" />
+              <Skeleton className="size-10 rounded-full" />
+              <Skeleton className="size-10 rounded-full" />
+              <Skeleton className="size-10 rounded-full" />
+            </>
+          ) : (
+            members.map((user) => (
+              <Link href={`/u/${user.handle}`} key={user.id}>
+                <Avatar>
+                  <AvatarImage src={user.image ?? ""} />
+                  <AvatarFallback>
+                    {user.handle![0].toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
+              </Link>
+            ))
+          )}
         </div>
       </CardHeader>
     </Card>
