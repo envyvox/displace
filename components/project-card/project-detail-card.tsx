@@ -21,7 +21,7 @@ type Props = {
 
 const ProjectDetailCard = ({ project, isLoading }: Props) => {
   return (
-    <Card className="col-span-3 md:col-span-2">
+    <Card className="col-span-3 h-fit md:col-span-2">
       <CardHeader>
         <CardTitle>
           {isLoading ? <Skeleton className="h-[24px] w-1/2" /> : project?.name}
