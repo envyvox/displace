@@ -1,7 +1,7 @@
-import Bagdes from "../bagdes";
-import TypographyLarge from "../typography/large";
-import { Card, CardHeader } from "../ui/card";
-import { Skeleton } from "../ui/skeleton";
+import { Card, CardHeader } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+import Bagdes from "@/components/bagdes";
+import TypographyLarge from "@/components/typography/large";
 
 type Props = {
   roles: string[];
