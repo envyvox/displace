@@ -12,8 +12,7 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-
-import { Skeleton } from "./skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type Value = Record<"key" | "label", string>;
 
