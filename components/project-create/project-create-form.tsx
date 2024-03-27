@@ -117,7 +117,10 @@ function ProjectCreateForm({ setOpen }: FormProps) {
             <FormItem>
               <FormLabel>Роли, которые вы ищете</FormLabel>
               <FormControl>
-                <RolePicker setSelected={field.onChange} />
+                <RolePicker
+                  selected={field.value}
+                  setSelected={field.onChange}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

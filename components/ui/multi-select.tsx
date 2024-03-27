@@ -12,24 +12,42 @@ import {
   CommandList,
 } from "@/components/ui/command";
 
+import { Skeleton } from "./skeleton";
+
 type Value = Record<"key" | "label", string>;
 
 type Props = {
   values: Value[];
-  selected: Value[];
-  setSelected: React.Dispatch<React.SetStateAction<Value[]>>;
+  preselected: Value[];
+  emitSelected: (selected: Value[]) => void;
   placeholder?: string;
+  isLoading?: boolean;
 };
 
 export function MultiSelect({
   values,
-  selected,
-  setSelected,
+  preselected,
+  emitSelected,
   placeholder = "Выбери из списка...",
+  isLoading = false,
 }: Props) {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [open, setOpen] = React.useState(false);
   const [inputValue, setInputValue] = React.useState("");
+  const [selected, setSelected] = React.useState<
+    Record<"key" | "label", string>[]
+  >([]);
+
+  React.useEffect(() => {
+    if (selected.length === 0 && selected.length !== preselected.length) {
+      setSelected(preselected);
+    }
+  }, [preselected, selected.length]);
+
+  React.useEffect(() => {
+    emitSelected(selected);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected]);
 
   const handleUnselect = React.useCallback(
     (selected: Value) => {
@@ -70,9 +88,16 @@ export function MultiSelect({
       className="overflow-visible bg-transparent"
     >
       <div className="group rounded-md border border-input px-3 py-2 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
-        <div className="flex flex-wrap gap-1">
-          {selected.map((value) => {
-            return (
+        <div className="flex flex-wrap gap-2">
+          {isLoading ? (
+            <>
+              <Skeleton className="h-[22px] w-16 rounded-full" />
+              <Skeleton className="h-[22px] w-16 rounded-full" />
+              <Skeleton className="h-[22px] w-16 rounded-full" />
+              <Skeleton className="h-[22px] w-16 rounded-full" />
+            </>
+          ) : (
+            selected.map((value) => (
               <Badge key={value.key} variant="secondary">
                 {value.label}
                 <button
@@ -91,8 +116,8 @@ export function MultiSelect({
                   <X className="size-3 text-muted-foreground hover:text-foreground" />
                 </button>
               </Badge>
-            );
-          })}
+            ))
+          )}
           {/* Avoid having the "Search" Icon */}
           <CommandPrimitive.Input
             ref={inputRef}
@@ -110,24 +135,22 @@ export function MultiSelect({
           <div className="absolute top-0 z-10 w-full rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in">
             <CommandList>
               <CommandGroup className="h-full overflow-auto">
-                {selectables.map((value) => {
-                  return (
-                    <CommandItem
-                      key={value.key}
-                      onMouseDown={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                      }}
-                      onSelect={(v) => {
-                        setInputValue("");
-                        setSelected((prev) => [...prev, value]);
-                      }}
-                      className={"cursor-pointer"}
-                    >
-                      {value.label}
-                    </CommandItem>
-                  );
-                })}
+                {selectables.map((value) => (
+                  <CommandItem
+                    key={value.key}
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                    onSelect={(v) => {
+                      setInputValue("");
+                      setSelected((prev) => [...prev, value]);
+                    }}
+                    className={"cursor-pointer"}
+                  >
+                    {value.label}
+                  </CommandItem>
+                ))}
               </CommandGroup>
             </CommandList>
           </div>

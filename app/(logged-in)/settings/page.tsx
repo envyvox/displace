@@ -11,11 +11,9 @@ import { useAddUserRoles } from "@/hooks/mutations/use-add-user-roles";
 import { useAddUserSocial } from "@/hooks/mutations/use-add-user-socials";
 import { useRemoveUserRoles } from "@/hooks/mutations/use-remove-user-roles";
 import { useRemoveUserSocial } from "@/hooks/mutations/use-remove-user-social";
-import { useRoles } from "@/hooks/queries/use-roles";
 import { useUserRoles } from "@/hooks/queries/use-user-roles";
 import { useUserSocials } from "@/hooks/queries/use-user-socials";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -25,7 +23,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import RolePicker from "@/components/role-picker";
 import TypographyLarge from "@/components/typography/large";
 
 const formSchema = z.object({
@@ -64,7 +62,6 @@ const SettingsPage = () => {
   const user = useUserStore((state) => state.user);
   const { data: userRoles } = useUserRoles(user?.id);
   const { data: userSocials } = useUserSocials(user?.id);
-  const { data: roles } = useRoles();
 
   const { mutate: removeUserRoles } = useRemoveUserRoles();
   const { mutate: addUserRoles } = useAddUserRoles();
@@ -157,33 +154,7 @@ const SettingsPage = () => {
           render={({ field }) => (
             <FormItem>
               <TypographyLarge>Роли</TypographyLarge>
-              <div className="grid max-w-[500px] grid-cols-2 gap-8">
-                {roles &&
-                  roles.map((role) => (
-                    <FormItem
-                      key={role.id}
-                      className="flex flex-row items-start space-x-3 space-y-0"
-                    >
-                      <FormControl>
-                        <Checkbox
-                          checked={field.value?.includes(role.id)}
-                          onCheckedChange={(checked: boolean) => {
-                            return checked
-                              ? field.onChange([...field.value, role.id])
-                              : field.onChange(
-                                  field.value?.filter(
-                                    (value) => value !== role.id
-                                  )
-                                );
-                          }}
-                        />
-                      </FormControl>
-                      <FormLabel className="text-sm font-medium leading-none">
-                        {role.name}
-                      </FormLabel>
-                    </FormItem>
-                  ))}
-              </div>
+              <RolePicker selected={field.value} setSelected={field.onChange} />
               <FormMessage />
             </FormItem>
           )}
