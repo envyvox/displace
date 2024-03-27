@@ -27,6 +27,15 @@ const selectFields: Record<keyof User, true> = {
   onboardingCompleted: true,
 };
 
+export const checkHandle = async (handle: string): Promise<boolean> => {
+  const user = await prisma.user.findUnique({
+    where: {
+      handle: handle,
+    },
+  });
+  return user !== null;
+};
+
 export const getUser = async (email: string): Promise<User | null> => {
   return await prisma.user.findUnique({
     select: selectFields,

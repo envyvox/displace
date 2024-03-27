@@ -1,5 +1,6 @@
 "use client";
 
+import { checkHandle } from "@/services/data-access/user";
 import { OnboardingStep, useOnboardingStore } from "@/store/onboarding-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -36,7 +37,15 @@ const OnboardingHandleForm = () => {
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    const handleTaken = await checkHandle(data.handle);
+
+    if (handleTaken) {
+      return form.setError("handle", {
+        message: "Имя пользователя уже занято.",
+      });
+    }
+
     setHandle(data.handle);
     setStep(OnboardingStep.Roles);
   }
