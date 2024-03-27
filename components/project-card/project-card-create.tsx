@@ -5,8 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
-import ProjectCreateButton from "./project-create-button";
+import ProjectCreateButton from "@/components/project-create/project-create-button";
 
 const ProjectCardCreate = () => {
   return (
