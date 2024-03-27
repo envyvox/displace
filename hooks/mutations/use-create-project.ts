@@ -8,7 +8,7 @@ type Props = {
   name: string;
   description: string;
   stack: string[];
-  lookingForRoles?: string[];
+  lookingForRoles: string[];
   readMoreLink?: string;
 };
 
