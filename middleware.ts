@@ -7,6 +7,7 @@ const protectedPaths = [
   "/users",
   "/u/",
   "/mentors",
+  "/settings",
 ];
 
 export async function middleware(request: NextRequest) {
