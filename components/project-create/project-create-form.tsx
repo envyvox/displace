@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import RolePicker from "@/components/role-picker";
 
 const FormSchema = z.object({
   name: z.string().min(1, { message: "Название проекта обязательно." }),
@@ -23,6 +24,7 @@ const FormSchema = z.object({
     .refine((value) => value.split(",").filter(Boolean).length > 0, {
       message: "Необходимо указать хотя бы одну технологию.",
     }),
+  lookingForRoles: z.array(z.string()),
   readMoreLink: z.string(),
 });
 
@@ -38,6 +40,7 @@ function ProjectCreateForm({ setOpen }: FormProps) {
       name: "",
       description: "",
       stack: "",
+      lookingForRoles: [],
       readMoreLink: "",
     },
   });
@@ -47,6 +50,7 @@ function ProjectCreateForm({ setOpen }: FormProps) {
       name: data.name,
       description: data.description,
       stack: data.stack.split(",").map((stack) => stack.trim()),
+      lookingForRoles: data.lookingForRoles,
       readMoreLink: data.readMoreLink,
     });
     setOpen(false);
@@ -101,6 +105,19 @@ function ProjectCreateForm({ setOpen }: FormProps) {
                   placeholder="React, Next.js, NextAuth, Prisma, Typescript, Tailwindcss, Zustand"
                   {...field}
                 />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="lookingForRoles"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Роли, которые вы ищете</FormLabel>
+              <FormControl>
+                <RolePicker setSelected={field.onChange} />
               </FormControl>
               <FormMessage />
             </FormItem>

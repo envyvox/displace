@@ -55,6 +55,7 @@ export const createProject = async (
   name: string,
   description: string,
   stack: string[],
+  lookingForRoles: string[],
   readMoreLink?: string
 ): Promise<Project> => {
   return await prisma.project.create({
@@ -67,6 +68,16 @@ export const createProject = async (
       members: {
         create: {
           userId: ownderId,
+        },
+      },
+      lookingForRoles: {
+        createMany: {
+          data: [
+            ...lookingForRoles.map((roleId) => ({
+              roleId: roleId,
+            })),
+          ],
+          skipDuplicates: true,
         },
       },
     },

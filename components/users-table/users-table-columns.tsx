@@ -12,7 +12,7 @@ export const columns: ColumnDef<UserWithRoles>[] = [
   },
   {
     accessorKey: "userRoles",
-    header: "Направления",
+    header: "Роли",
     cell: ({ row }) => <UsersTableCellRoles user={row.original} />,
   },
 ];

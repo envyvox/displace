@@ -8,6 +8,7 @@ type Props = {
   name: string;
   description: string;
   stack: string[];
+  lookingForRoles?: string[];
   readMoreLink?: string;
 };
 
@@ -16,8 +17,21 @@ export const useCreateProject = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ name, description, stack, readMoreLink }: Props) =>
-      createProject(user.id, name, description, stack, readMoreLink),
+    mutationFn: ({
+      name,
+      description,
+      stack,
+      lookingForRoles,
+      readMoreLink,
+    }: Props) =>
+      createProject(
+        user.id,
+        name,
+        description,
+        stack,
+        lookingForRoles,
+        readMoreLink
+      ),
     onSuccess: (data, variables, context) => {
       queryClient.invalidateQueries({
         queryKey: ReactQueryKeys.projects,

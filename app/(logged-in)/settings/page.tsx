@@ -30,7 +30,7 @@ import TypographyLarge from "@/components/typography/large";
 
 const formSchema = z.object({
   roles: z.array(z.string()).refine((value) => value.some((role) => role), {
-    message: "Необходимо выбрать как минимум 1 направление.",
+    message: "Необходимо выбрать как минимум 1 роль.",
   }),
   telegram: z
     .union([
@@ -156,7 +156,7 @@ const SettingsPage = () => {
           name="roles"
           render={({ field }) => (
             <FormItem>
-              <TypographyLarge>Направления</TypographyLarge>
+              <TypographyLarge>Роли</TypographyLarge>
               <div className="grid max-w-[500px] grid-cols-2 gap-8">
                 {roles &&
                   roles.map((role) => (

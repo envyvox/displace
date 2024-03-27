@@ -1,11 +1,11 @@
 "use client";
 
 import { useProject } from "@/hooks/queries/use-project";
-import ProjectDetailCard from "@/components/project-card/project-detail-card";
-import ProjectDetailMembers from "@/components/project-card/project-detail-members";
-import ProjectDetailNotFound from "@/components/project-card/project-detail-not-found";
-import ProjectDetailRoles from "@/components/project-card/project-detail-roles";
-import ProjectDetailStack from "@/components/project-card/project-detail-stack";
+import ProjectDetailCard from "@/components/project-detail/project-detail-card";
+import ProjectDetailMembers from "@/components/project-detail/project-detail-members";
+import ProjectDetailNotFound from "@/components/project-detail/project-detail-not-found";
+import ProjectDetailRoles from "@/components/project-detail/project-detail-roles";
+import ProjectDetailStack from "@/components/project-detail/project-detail-stack";
 
 const ProjectPage = ({ params }: { params: { id: string } }) => {
   const { data: project, isLoading } = useProject({ id: params.id });
