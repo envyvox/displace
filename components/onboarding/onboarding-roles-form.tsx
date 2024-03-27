@@ -5,17 +5,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { useRoles } from "@/hooks/queries/use-roles";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import RolePicker from "@/components/role-picker";
 import TypographyLarge from "@/components/typography/large";
 import TypographyMuted from "@/components/typography/muted";
 
@@ -29,7 +21,6 @@ const OnboardingRolesForm = () => {
   const setRoles = useOnboardingStore((state) => state.setRoles);
   const setStep = useOnboardingStore((state) => state.setStep);
   const { roles: formRoles } = useOnboardingStore((state) => state.Form);
-  const { data: roles } = useRoles();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -62,33 +53,7 @@ const OnboardingRolesForm = () => {
                   Вы сможете изменить это в своем профиле в любой момент.
                 </TypographyMuted>
               </div>
-              <div className="grid max-w-[500px] grid-cols-2 gap-8">
-                {roles &&
-                  roles.map((role) => (
-                    <FormItem
-                      key={role.id}
-                      className="flex flex-row items-start space-x-3 space-y-0"
-                    >
-                      <FormControl>
-                        <Checkbox
-                          checked={field.value?.includes(role.id)}
-                          onCheckedChange={(checked: boolean) => {
-                            return checked
-                              ? field.onChange([...field.value, role.id])
-                              : field.onChange(
-                                  field.value?.filter(
-                                    (value) => value !== role.id
-                                  )
-                                );
-                          }}
-                        />
-                      </FormControl>
-                      <FormLabel className="text-sm font-medium leading-none">
-                        {role.name}
-                      </FormLabel>
-                    </FormItem>
-                  ))}
-              </div>
+              <RolePicker selected={field.value} setSelected={field.onChange} />
               <FormMessage />
             </FormItem>
           )}
