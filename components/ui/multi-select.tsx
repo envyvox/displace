@@ -7,6 +7,7 @@ import { X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
   Command,
+  CommandEmpty,
   CommandGroup,
   CommandItem,
   CommandList,
@@ -134,6 +135,7 @@ export function MultiSelect({
         {open && selectables.length > 0 ? (
           <div className="absolute top-0 z-10 w-full rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in">
             <CommandList>
+              <CommandEmpty>Ничего не найдено.</CommandEmpty>
               <CommandGroup className="h-full overflow-auto">
                 {selectables.map((value) => (
                   <CommandItem
